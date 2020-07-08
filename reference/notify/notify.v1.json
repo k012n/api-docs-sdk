@@ -6,7 +6,20 @@
   },
   "servers": [
     {
-      "url": "http://localhost:5000"
+      "url": "http://localhost:5000",
+      "description": "dev"
+    },
+    {
+      "url": "https://mea-api.stage.mapboss.co.th/energy",
+      "description": "qa"
+    },
+    {
+      "url": "https://apidev.mea.or.th/energy",
+      "description": "staging"
+    },
+    {
+      "url": "https://api.mea.or.th/energy",
+      "description": "production"
     }
   ],
   "paths": {
