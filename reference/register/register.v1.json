@@ -1,0 +1,154 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Register",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:5000"
+    }
+  ],
+  "paths": {
+    "/register/register-ca": {
+      "put": {
+        "summary": "/register/register-ca",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "data": {
+                      "type": "object",
+                      "description": "Primary data\t",
+                      "properties": {
+                        "projectId": {
+                          "description": "รหัสโครงการ\t",
+                          "type": "string"
+                        },
+                        "meterNo": {
+                          "type": "string",
+                          "description": "รหัสเครื่องวัดฯ\t"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-register-register-ca",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "ca": {
+                    "type": "string",
+                    "description": "บัญชีแสดงสัญญา"
+                  },
+                  "projectCode": {
+                    "description": "รหัสโครงการของ Developer",
+                    "type": "string"
+                  },
+                  "projectName": {
+                    "description": "ชื่อโครงการ ภาษาไทย",
+                    "type": "string"
+                  },
+                  "projectNameEn": {
+                    "description": "ชื่อโครงการ ภาษาอังกฤษ",
+                    "type": "string"
+                  },
+                  "projectAddress": {
+                    "type": "string",
+                    "description": "ที่อยู่โครงการ ภาษาไทย"
+                  },
+                  "projectAddressEn": {
+                    "type": "string",
+                    "description": "ที่อยู่โครงการ ภาษาอังกฤษ"
+                  }
+                },
+                "required": [
+                  "ca",
+                  "projectCode",
+                  "projectName",
+                  "projectAddress"
+                ]
+              }
+            }
+          },
+          "description": ""
+        },
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "description": "API Key",
+            "name": "X-Api-Key",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-Client-Code",
+            "required": true,
+            "description": "Client Code"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-Ios-Bundle-Identifier",
+            "required": true,
+            "description": "Bundle Id หรือ Package name (สำหรับ iOS)"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-Android-Package",
+            "description": "Bundle Id หรือ Package name (สำหรับ Android)",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-Sdk-Version",
+            "description": "Version ของ SDK",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-Sdk-Platform",
+            "required": true,
+            "description": "ประเภทของ os\n- Android ใช้ค่า 'android'\n- iOS ใช้ค่า 'iOS'\n- React Native ใช้ค่า 'react-native'"
+          }
+        ],
+        "description": "ลงทะเบียนเครื่องวัดฯ ก่อนใช้งาน"
+      }
+    }
+  },
+  "components": {
+    "schemas": {}
+  }
+}

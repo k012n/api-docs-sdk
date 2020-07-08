@@ -1,0 +1,85 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Webhooks",
+    "version": "1.0",
+    "description": "Client webhooks"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:5000"
+    }
+  ],
+  "paths": {
+    "/webhooks": {
+      "post": {
+        "summary": "/webhooks",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "description": "Primary data\t",
+                      "properties": {
+                        "success": {
+                          "description": "สถานะการส่งข้อมูล",
+                          "type": "boolean"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-messaging-message",
+        "parameters": [],
+        "description": "Webhooks ของ client เพื่อให้ SDK API ส่งรายการข้อความแจ้งเตือน",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "messageId": {
+                      "type": "string",
+                      "description": "รหัสข้อความ"
+                    },
+                    "ca": {
+                      "type": "string",
+                      "description": "เลขที่แสดงสัญญา"
+                    },
+                    "title": {
+                      "type": "string",
+                      "description": "ข้อความ Title"
+                    },
+                    "detail": {
+                      "type": "string",
+                      "description": "รายละเอียดข้อความ"
+                    },
+                    "messageType": {
+                      "type": "string",
+                      "description": "ประเภทข้อความ"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {}
+  }
+}

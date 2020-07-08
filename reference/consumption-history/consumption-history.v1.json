@@ -1,0 +1,137 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Consumption History",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:5000"
+    }
+  ],
+  "paths": {
+    "/consumption-history/history": {
+      "get": {
+        "summary": "/consumption-history/history",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "data": {
+                      "type": "object",
+                      "description": "Primary data\t",
+                      "properties": {
+                        "year": {
+                          "description": "ปีของข้อมูล (ค.ศ.)\t",
+                          "type": "number"
+                        },
+                        "month": {
+                          "description": "เดือนของข้อมูล (นับเดือนเริ่มจาก 0)\t",
+                          "type": "number"
+                        },
+                        "amount": {
+                          "type": "number",
+                          "description": "จำนวนเงินค่าไฟฟ้า\t"
+                        },
+                        "unit": {
+                          "type": "number",
+                          "description": "จำนวนหน่วยใช้ไฟฟ้า\t"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-consumption-history-history",
+        "description": "ข้อมูลประวัติค่าไฟฟ้าย้อนหลัง 6 เดือน",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "description": "API Key",
+            "name": "X-Api-Key",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-Client-Code",
+            "required": true,
+            "description": "Client Code"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-Ios-Bundle-Identifier",
+            "required": true,
+            "description": "Bundle Id หรือ Package name (สำหรับ iOS)"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-Android-Package",
+            "description": "Bundle Id หรือ Package name (สำหรับ Android)",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-Sdk-Version",
+            "description": "Version ของ SDK",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-Sdk-Platform",
+            "required": true,
+            "description": "ประเภทของ os\n- Android ใช้ค่า 'android'\n- iOS ใช้ค่า 'iOS'\n- React Native ใช้ค่า 'react-native'"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "ca",
+            "required": true,
+            "description": "บัญชีแสดงสัญญา"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "type",
+            "description": "ประเภทข้อมูล amount=จำนวนเงิน, unit = จำนวนหน่วย"
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {}
+  }
+}

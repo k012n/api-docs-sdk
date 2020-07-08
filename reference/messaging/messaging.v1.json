@@ -1,0 +1,391 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Messaging",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:5000"
+    }
+  ],
+  "paths": {
+    "/messaging/message": {
+      "get": {
+        "summary": "/messaging/message",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "data": {
+                      "type": "object",
+                      "description": "Primary data\t",
+                      "properties": {
+                        "messageId": {
+                          "description": "รหัสข้อความ",
+                          "type": "string"
+                        },
+                        "ca": {
+                          "type": "string",
+                          "description": "เลขที่แสดงสัญญา"
+                        },
+                        "meterNo": {
+                          "type": "string",
+                          "description": "Meter No"
+                        },
+                        "title": {
+                          "type": "string",
+                          "description": "Title ข้อความ"
+                        },
+                        "detail": {
+                          "type": "string",
+                          "description": "Detail ข้อความ"
+                        },
+                        "messageType": {
+                          "type": "string",
+                          "description": "ประเภทข้อความแจ้งเตือน"
+                        },
+                        "messageDate": {
+                          "type": "string",
+                          "description": "วันที่และเวลาแจ้งเตือน ในรูปแบบ ISO String"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-messaging-message",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "description": "API Key",
+            "name": "X-Api-Key",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-Client-Code",
+            "required": true,
+            "description": "Client Code"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-Ios-Bundle-Identifier",
+            "required": true,
+            "description": "Bundle Id หรือ Package name (สำหรับ iOS)"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-Android-Package",
+            "description": "Bundle Id หรือ Package name (สำหรับ Android)",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-Sdk-Version",
+            "description": "Version ของ SDK",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-Sdk-Platform",
+            "required": true,
+            "description": "ประเภทของ os\n- Android ใช้ค่า 'android'\n- iOS ใช้ค่า 'iOS'\n- React Native ใช้ค่า 'react-native'"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "ca",
+            "description": "บัญชีแสดงสัญญา",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "number"
+            },
+            "in": "query",
+            "name": "limit",
+            "description": "จำนวนข้อความที่ต้องการ default ที่ 3 ข้อความ, กรณี limit = 0 ให้ return ข้อความทั้งหมดย้อนหลัง 6 เดือน"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "categories",
+            "description": "ประเภทข้อความที่ต้องการ คั่นด้วย \",\" เช่น BILLING, WARNING"
+          }
+        ],
+        "description": "Feeds ข้อความแจ้งเตือน"
+      }
+    },
+    "/messaging/message/{messageId}": {
+      "get": {
+        "summary": "/messaging/message/{messageId}",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "data": {
+                      "type": "object",
+                      "description": "Primary data\t",
+                      "properties": {
+                        "messageId": {
+                          "description": "Message Id\t",
+                          "type": "string"
+                        },
+                        "ca": {
+                          "type": "string",
+                          "description": "CA Number\t"
+                        },
+                        "meterNo": {
+                          "type": "string",
+                          "description": "Meter No\t"
+                        },
+                        "title": {
+                          "type": "string",
+                          "description": "Title ข้อความ\t"
+                        },
+                        "detail": {
+                          "type": "string",
+                          "description": "Detail ข้อความ\t"
+                        },
+                        "messageType": {
+                          "type": "string",
+                          "description": "ประเภทข้อความแจ้งเตือน\t"
+                        },
+                        "messageDate": {
+                          "type": "string",
+                          "description": "วันที่และเวลาแจ้งเตือน ในรูปแบบ ISO String\t"
+                        },
+                        "messageTempId": {
+                          "type": "string",
+                          "description": "ID ประจำข้อมูล"
+                        },
+                        "publishStatus": {
+                          "type": "string",
+                          "description": "สถานะการส่งแจ้งเตือน"
+                        },
+                        "publishDate": {
+                          "type": "string",
+                          "description": "วันที่และเวลาส่งแจ้งเตือน ในรูปแบบ ISO String"
+                        }
+                      }
+                    }
+                  }
+                },
+                "examples": {}
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "title": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "MIISING_CA": {
+                    "value": {
+                      "meta": {
+                        "copyright": "Copyright 2020 The Metropolitan Electricity Authority. All rights reserved.",
+                        "authors": [
+                          "MAPBOSS Co., Ltd."
+                        ]
+                      },
+                      "errors": [
+                        {
+                          "title": "MIISING_CA"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "title": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "MESSAGE_NOT_FOUND": {
+                    "value": {
+                      "meta": {
+                        "copyright": "Copyright 2020 The Metropolitan Electricity Authority. All rights reserved.",
+                        "authors": [
+                          "MAPBOSS Co., Ltd."
+                        ]
+                      },
+                      "errors": [
+                        {
+                          "title": "MESSAGE_NOT_FOUND"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-messaging-message-:messageId",
+        "description": "รายละเอียดข้อความแจ้งเตือน",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "description": "API Key",
+            "name": "X-Api-Key",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-Client-Code",
+            "required": true,
+            "description": "Client Code"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-Ios-Bundle-Identifier",
+            "required": true,
+            "description": "Bundle Id หรือ Package name (สำหรับ iOS)"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-Android-Package",
+            "description": "Bundle Id หรือ Package name (สำหรับ Android)",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-Sdk-Version",
+            "description": "Version ของ SDK",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-Sdk-Platform",
+            "required": true,
+            "description": "ประเภทของ os\n- Android ใช้ค่า 'android'\n- iOS ใช้ค่า 'iOS'\n- React Native ใช้ค่า 'react-native'"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "ca",
+            "description": "เลขที่แสดงสัญญา",
+            "required": true
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "messageId",
+          "in": "path",
+          "required": true,
+          "description": "Message ID"
+        }
+      ]
+    }
+  },
+  "components": {
+    "schemas": {}
+  }
+}

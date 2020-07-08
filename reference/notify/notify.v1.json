@@ -1,0 +1,162 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "notify",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:5000"
+    }
+  ],
+  "paths": {
+    "/notify/send-outage": {
+      "post": {
+        "summary": "/notify/send-outage",
+        "operationId": "post-notify-send-outage",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "description": "API Key",
+            "name": "X-Api-Key",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-Client-Code",
+            "required": true,
+            "description": "Client Code"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-Ios-Bundle-Identifier",
+            "required": true,
+            "description": "Bundle Id หรือ Package name (สำหรับ iOS)"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-Android-Package",
+            "description": "Bundle Id หรือ Package name (สำหรับ Android)",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-Sdk-Version",
+            "description": "Version ของ SDK",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-Sdk-Platform",
+            "required": true,
+            "description": "ประเภทของ os\n- Android ใช้ค่า 'android'\n- iOS ใช้ค่า 'iOS'\n- React Native ใช้ค่า 'react-native'"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {},
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "string",
+                          "description": "ผลการแจ้งเหตุ"
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "ข้อความอธิบาย"
+                        },
+                        "sendOutageId": {
+                          "type": "string",
+                          "description": "รหัสการแจ้งเหตุ"
+                        },
+                        "ffmStatus": {
+                          "type": "string",
+                          "description": "สถานะการแจ้งเหตุจากระบบ FFM"
+                        }
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "Code (0)": {
+                    "value": {
+                      "code": "SUCCESS",
+                      "title": "การไฟฟ้านครหลวง ได้รับแจ้งเหตุไฟฟ้าขัดข้องเรียบร้อย จะเร่งดำเนินการตรวจสอบและแก้ไขให้ต่อไป ขอบคุณครับ",
+                      "sendOutageId": "",
+                      "ffmStatus": ""
+                    }
+                  },
+                  "Code (4)": {
+                    "value": {
+                      "code": "DUPLICATE",
+                      "title": "ตำแหน่งนี้ได้รับการแจ้งแล้ว"
+                    }
+                  },
+                  "Code (-1)": {
+                    "value": {
+                      "code": "ERROR",
+                      "title": "ไม่สามารถแจ้งเหตุได้"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "ca": {
+                    "type": "string"
+                  },
+                  "telNo": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "ca",
+                  "telNo"
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {}
+  }
+}

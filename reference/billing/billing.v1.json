@@ -1,0 +1,174 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Billing",
+    "version": "1.0",
+    "description": ""
+  },
+  "servers": [
+    {
+      "url": "http://localhost:5000"
+    }
+  ],
+  "paths": {
+    "/billing/enquiry": {
+      "get": {
+        "summary": "/billing/enquiry",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "data": {
+                      "type": "object",
+                      "description": "Primary data\t",
+                      "properties": {
+                        "amount": {
+                          "description": "จำนวนเงินค่าไฟฟ้า\t",
+                          "type": "number"
+                        },
+                        "dueDate": {
+                          "type": "string",
+                          "description": "วันที่ครบกำหนดชำระ ในรูปแบบ YYYY-MM-DD\t"
+                        },
+                        "qrCodeString": {
+                          "type": "string",
+                          "description": "ข้อมูลสำหรับสร้าง QR Code ค่าไฟฟ้า (กรณี requireQRCodeString = true)\t"
+                        },
+                        "qrCodeHint": {
+                          "type": "string",
+                          "description": "ข้อความสำหรับแสดงใต้ QR Code (กรณี requireQRCodeHint = true)\t"
+                        },
+                        "barcodeHint": {
+                          "type": "string",
+                          "description": "ข้อความสำหรับแสดงใต้ Barcode (กรณี requireBarcodeHint = true)\t"
+                        },
+                        "lastUnit": {
+                          "type": "number",
+                          "description": "จำนวนหน่วยใช้ไฟฟ้าของบิลล่าสุด\t  "
+                        },
+                        "disconnectAmt": {
+                          "type": "number",
+                          "description": "ค่าดำเนินการงดจ่ายไฟ (ถ้าตัวเลขไม่เป็น 0 ให้แสดงข้อความกับผู้ใช้งาน)\t"
+                        },
+                        "totalInt": {
+                          "type": "number",
+                          "description": "จานวนเงินเบี้ยปรับผิดนัดทั้งหมด (ถ้าตัวเลขไม่เป็น 0 ให้แสดงข้อความกับผู้ใช้งาน)\t"
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "ข้อความแจ้งเตือนลูกค้า (ถ้าไม่เป็น null ให้แสดง message กับผู้ใช้งาน)\t"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-billing-enquiry",
+        "description": "ข้อมูลค่าไฟฟ้าเดือนปัจจุบัน",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "description": "API Key",
+            "name": "X-Api-Key",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-Client-Code",
+            "required": true,
+            "description": "Client Code"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-Ios-Bundle-Identifier",
+            "required": true,
+            "description": "Bundle Id หรือ Package name (สำหรับ iOS)"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-Android-Package",
+            "description": "Bundle Id หรือ Package name (สำหรับ Android)",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-Sdk-Version",
+            "description": "Version ของ SDK",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-Sdk-Platform",
+            "required": true,
+            "description": "ประเภทของ os\n- Android ใช้ค่า 'android'\n- iOS ใช้ค่า 'iOS'\n- React Native ใช้ค่า 'react-native'"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "ca",
+            "description": "บัญชีแสดงสัญญา\n",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "boolean"
+            },
+            "in": "query",
+            "name": "requireQRCodeString",
+            "description": "ต้องการข้อมูลสำหรับสร้าง QR Code ค่าไฟฟ้า"
+          },
+          {
+            "schema": {
+              "type": "boolean"
+            },
+            "in": "query",
+            "name": "requireQRCodeHint",
+            "description": "ต้องการข้อความสำหรับแสดงใต้ QR Code"
+          },
+          {
+            "schema": {
+              "type": "boolean"
+            },
+            "in": "query",
+            "name": "requireBarcodeHint",
+            "description": "ต้องการข้อความสำหรับแสดงใต้ Barcode"
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {}
+  }
+}
