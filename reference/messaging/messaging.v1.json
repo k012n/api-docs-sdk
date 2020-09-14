@@ -56,8 +56,21 @@
                         "messageDate": {
                           "type": "string",
                           "description": "วันที่และเวลาแจ้งเตือน ในรูปแบบ ISO String"
+                        },
+                        "workStatus": {
+                          "type": "string",
+                          "description": "0 = ดำเนินการแก้ไขไฟฟ้า, 1 = แก้ไขไฟฟ้าเสร็จ"
                         }
-                      }
+                      },
+                      "required": [
+                        "messageId",
+                        "ca",
+                        "meterNo",
+                        "title",
+                        "detail",
+                        "messageType",
+                        "messageDate"
+                      ]
                     }
                   }
                 }

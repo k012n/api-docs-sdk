@@ -125,7 +125,7 @@
             },
             "in": "query",
             "name": "type",
-            "description": "ประเภทข้อมูล amount=จำนวนเงิน, unit = จำนวนหน่วย"
+            "description": "ประเภทข้อมูล amount=จำนวนเงิน, unit = จำนวนหน่วย, all = ทั้งหมด"
           }
         ]
       }

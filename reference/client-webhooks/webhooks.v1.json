@@ -61,14 +61,6 @@
                     "title": {
                       "type": "string",
                       "description": "ข้อความ Title"
-                    },
-                    "detail": {
-                      "type": "string",
-                      "description": "รายละเอียดข้อความ"
-                    },
-                    "messageType": {
-                      "type": "string",
-                      "description": "ประเภทข้อความ"
                     }
                   }
                 }

@@ -26,7 +26,12 @@
                       "$ref": "../common/models/meta.v1.json"
                     },
                     "data": {
-                      "type": "object"
+                      "type": "object",
+                      "properties": {
+                        "success": {
+                          "type": "boolean"
+                        }
+                      }
                     }
                   }
                 }
@@ -36,9 +41,9 @@
         }
       }
     },
-    "/trigger/outage": {
+    "/trigger/send-outage": {
       "post": {
-        "summary": "/trigger/outage",
+        "summary": "/trigger/send-outage",
         "operationId": "post-trigger-outage",
         "responses": {
           "200": {
@@ -52,7 +57,12 @@
                       "$ref": "../common/models/meta.v1.json"
                     },
                     "data": {
-                      "type": "object"
+                      "type": "object",
+                      "properties": {
+                        "success": {
+                          "type": "boolean"
+                        }
+                      }
                     }
                   }
                 }
@@ -84,6 +94,101 @@
                   "CHILD_FAIL_ID",
                   "STATUS"
                 ]
+              }
+            }
+          }
+        },
+        "description": ""
+      },
+      "parameters": []
+    },
+    "/trigger/billed-accept": {
+      "post": {
+        "summary": "",
+        "operationId": "post-trigger-billed-accept",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "success": {
+                          "type": "boolean"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/trigger/billed-reject": {
+      "post": {
+        "summary": "",
+        "operationId": "post-trigger-billed-reject",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "success": {
+                          "type": "boolean"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/trigger/warning": {
+      "post": {
+        "summary": "",
+        "operationId": "post-trigger-warning",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "success": {
+                          "type": "boolean"
+                        }
+                      }
+                    }
+                  }
+                }
               }
             }
           }
